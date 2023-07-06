@@ -1,0 +1,88 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+}
+
+.home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f5f5f5;
+}
+
+.User{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 20vw;
+    background-color: #1165A9;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 80vw;
+    background-color: #f5f5f5;
+}
+
+.UserInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 20vw;
+    background-color: #1165A9;
+    flex-grow: 5;
+}
+
+.UserInfo h3{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.UserDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    width: 20vw;
+    background-color: #1165A9;
+    flex-grow: 5;
+}
+
+.log{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 20vw;
+    background-color: #1165A9;
+    flex-grow: 1;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 80vw;
+    background-color: #f5f5f5;
+}
