@@ -25,16 +25,19 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
 
     try {
-      const response = await fetch("http://localhost:5005/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: data.get("email"),
-          password: data.get("password"),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://vedanta-services.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: data.get("email"),
+            password: data.get("password"),
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const json = await response.json();
 
       if (json.status === "ok") {
