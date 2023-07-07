@@ -18,11 +18,25 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // avatar: {
+  //   public_id: {
+  //     type: String,
+  //     required: true,
+  //   },
+  //   url: {
+  //     type: String,
+  //     required: true,
+  //   },
+  // },
+  avatar: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign(
-    { _id: this.id, username: this.username, employeeId: this.employeeId},
+    { _id: this.id, username: this.username, employeeId: this.employeeId, avatar: this.avatar},
     process.env.JWT_SECRET,
     {
       expiresIn: "1h",

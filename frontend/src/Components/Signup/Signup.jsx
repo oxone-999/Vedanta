@@ -11,11 +11,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import Link from "@mui/material/Link";
-import toast from "react-hot-toast";
+import { AvatarGenerator } from "random-avatar-generator";
 
 const defaultTheme = createTheme();
 
 export default function Signup() {
+  const generator = new AvatarGenerator();
   const [error, setError] = React.useState(null);
   const history = useNavigate();
   const handleSubmit = async (event) => {
@@ -24,6 +25,7 @@ export default function Signup() {
 
     try {
       const response = await fetch(
+        // "http://localhost:5005/api/auth/signup",
         "https://vedanta-services.onrender.com/api/auth/signup",
         {
           method: "POST",
@@ -31,6 +33,7 @@ export default function Signup() {
             name: data.get("Name"),
             employeeId: data.get("employeeId"),
             password: data.get("password"),
+            avatar: generator.generateRandomAvatar(),
           }),
           headers: {
             "Content-Type": "application/json",
@@ -40,7 +43,7 @@ export default function Signup() {
       const json = await response.json();
 
       if (json.status === "ok") {
-        toast.success("Signup Successful");
+        alert("Signup Successful");
         history("/login");
       } else {
         alert("Signup Failed");
