@@ -3,9 +3,9 @@ const bcrypt = require("bcrypt");
 
 const Login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { employeeId, password } = req.body;
 
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ employeeId: employeeId });
     if (!user) {
         return res.status(400).json({ error: "User does not exist" });
     }
@@ -17,7 +17,7 @@ const Login = async (req, res) => {
 
     const token = await user.generateAuthToken();
 
-    if(email === "anujverma11062002@gmail.com"){
+    if(employeeId === "anujverma11062002@gmail.com"){
         res.status(200).json({ status: "ok", data: token, admin: true });
     }else{
       res.status(200).json({ status: "ok", data: token, admin: false });

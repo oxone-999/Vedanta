@@ -31,7 +31,7 @@ export default function Signup() {
           method: "POST",
           body: JSON.stringify({
             name: data.get("Name"),
-            email: data.get("email"),
+            employeeId: data.get("employeeId"),
             password: data.get("password"),
           }),
           headers: {
@@ -97,9 +97,9 @@ export default function Signup() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
+                  id="employeeId"
+                  label="Employee ID"
+                  name="employeeId"
                   autoComplete="email"
                 />
               </Grid>
@@ -115,12 +115,6 @@ export default function Signup() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
                 {error && <h3>{error}</h3>}
               </Grid>
             </Grid>

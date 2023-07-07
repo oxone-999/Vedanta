@@ -30,7 +30,7 @@ export default function Login() {
         {
           method: "POST",
           body: JSON.stringify({
-            email: data.get("email"),
+            employeeId: data.get("employeeId"),
             password: data.get("password"),
           }),
           headers: {
@@ -90,10 +90,10 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="employeeId"
+              label="Employee ID"
+              name="employeeId"
+              autoComplete="employeeId"
               autoFocus
             />
             <TextField
@@ -105,10 +105,6 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             {error && <p>{error}</p>}
             <Button

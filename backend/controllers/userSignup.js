@@ -3,16 +3,16 @@ const bcrypt = require("bcrypt");
 
 const Signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, employeeId, password } = req.body;
 
     const username = await User.findOne({ username: name });
     if (username) {
       res.status(400).json({ error: "Username already exists" });
     }
 
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ employeeId: employeeId });
     if (user) {
-      res.status(400).json({ error: "Email already exists" });
+      res.status(400).json({ error: "employeeId already exists" });
     }
 
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
@@ -20,7 +20,7 @@ const Signup = async (req, res) => {
 
     const newUser = new User({
       username: name,
-      email: email,
+      employeeId: employeeId,
       password: hashedPassword,
     });
 
