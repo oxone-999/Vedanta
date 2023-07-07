@@ -17,7 +17,7 @@ const Login = async (req, res) => {
 
     const token = await user.generateAuthToken();
 
-    if(employeeId === "anujverma11062002@gmail.com"){
+    if(employeeId === ""){
         res.status(200).json({ status: "ok", data: token, admin: true });
     }else{
       res.status(200).json({ status: "ok", data: token, admin: false });
