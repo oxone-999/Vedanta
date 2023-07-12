@@ -90,7 +90,7 @@ export default function Signup() {
               </div>
               {error && <h3>{error}</h3>}
               <button className={Styles.loginbtn} type="submit">
-                Login
+                Register
               </button>
             </form>
             <p>
