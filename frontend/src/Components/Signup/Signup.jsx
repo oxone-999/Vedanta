@@ -1,38 +1,30 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router";
-import Link from "@mui/material/Link";
+import React, { useState } from "react";
+import Styles from "../../Styles/Signup.module.css";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { AvatarGenerator } from "random-avatar-generator";
-
-const defaultTheme = createTheme();
 
 export default function Signup() {
   const generator = new AvatarGenerator();
+  const [fullName, setFullName] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = React.useState(null);
+
   const history = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
     try {
       const response = await fetch(
-        // "http://localhost:5005/api/auth/signup",
-        "https://vedanta-services.onrender.com/api/auth/signup",
+        "http://localhost:5005/api/auth/signup",
+        // "https://vedanta-services.onrender.com/api/auth/signup",
         {
           method: "POST",
           body: JSON.stringify({
-            name: data.get("Name"),
-            employeeId: data.get("employeeId"),
-            password: data.get("password"),
+            name: fullName,
+            employeeId: employeeId,
+            password: password,
             avatar: generator.generateRandomAvatar(),
           }),
           headers: {
@@ -43,10 +35,10 @@ export default function Signup() {
       const json = await response.json();
 
       if (json.status === "ok") {
-        alert("Signup Successful");
+        toast.success("Signup Successful");
         history("/login");
       } else {
-        alert("Signup Failed");
+        toast.error("Signup Failed");
         setError(json.error);
       }
 
@@ -59,84 +51,55 @@ export default function Signup() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="Name"
+    <div className={Styles.login_container}>
+      <ToastContainer />
+      <div className={Styles.ccontainer}>
+        <div className={Styles.right}>
+          <div className={Styles.form_container}>
+            <img src="./authBg.jpg" alt="register" />
+            <form onSubmit={handleSubmit}>
+              <div className={Styles.container}>
+                <input
+                  type="text"
+                  name="text"
+                  className={Styles.input}
+                  placeholder="username"
+                  onChange={(e) => setFullName(e.target.value)}
                   required
-                  fullWidth
-                  id="Name"
-                  label="username"
-                  autoFocus
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
+              </div>
+              <div className={Styles.container}>
+                <input
+                  type="text"
+                  name="epmloyeeId"
+                  className={Styles.input}
+                  placeholder="employeeId"
+                  onChange={(e) => setEmployeeId(e.target.value)}
                   required
-                  fullWidth
-                  id="employeeId"
-                  label="Employee ID"
-                  name="employeeId"
-                  autoComplete="employeeId"
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
+              </div>
+              <div className={Styles.container}>
+                <input
                   type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  name="text"
+                  className={Styles.input}
+                  placeholder="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-              </Grid>
-              <Grid item xs={12}>
-                {error && <h3>{error}</h3>}
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+              </div>
+              {error && <h3>{error}</h3>}
+              <button className={Styles.loginbtn} type="submit">
+                Login
+              </button>
+            </form>
+            <p>
+              Already have an account? <a href="/login">Login here</a>.
+            </p>
+          </div>
+        </div>
+        <div className={Styles.left}>Register</div>
+      </div>
+    </div>
   );
 }

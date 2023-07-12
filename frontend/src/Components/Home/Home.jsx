@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Styles from "../../Styles/Home.module.css";
-import Button from "@mui/material/Button";
 import { isExpired, decodeToken } from "react-jwt";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import Reports from "../Report/Report";
+import Settings from "../Settings/Settings";
 
 function Home() {
   const token = localStorage.getItem("token");
@@ -11,6 +12,11 @@ function Home() {
   const decodedToken = decodeToken(token);
   const [currUser, setUser] = useState({});
   const [disabled, setDisabled] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState("projects");
+
+  const handleComponentChange = (componentName) => {
+    setSelectedComponent(componentName);
+  };
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -29,7 +35,7 @@ function Home() {
         window.location = "/login";
       }
     } else {
-      window.location = "/projects";
+      window.location = "/";
     }
 
     if (admin === "true") {
@@ -73,35 +79,61 @@ function Home() {
           <div className={Styles.navbar__right}>
             <div className={Styles.radio_inputs}>
               <label className={Styles.radio}>
-                <input type="radio" name="radio" defaultChecked />
+                <input
+                  type="radio"
+                  name="radio"
+                  checked={selectedComponent === "projects"}
+                  onChange={() => handleComponentChange("projects")}
+                />
                 <span className={Styles.name}>Projects</span>
               </label>
               <label className={Styles.radio}>
-                <input type="radio" name="radio" />
+                <input
+                  type="radio"
+                  name="radio"
+                  checked={selectedComponent === "employees"}
+                  onChange={() => handleComponentChange("employees")}
+                />
                 <span className={Styles.name}>Employees</span>
               </label>
-
               <label className={Styles.radio}>
-                <input type="radio" name="radio" />
+                <input
+                  type="radio"
+                  name="radio"
+                  checked={selectedComponent === "tasks"}
+                  onChange={() => handleComponentChange("tasks")}
+                />
                 <span className={Styles.name}>Tasks</span>
               </label>
-
               <label className={Styles.radio}>
-                <input type="radio" name="radio" />
+                <input
+                  type="radio"
+                  name="radio"
+                  checked={selectedComponent === "reports"}
+                  onChange={() => handleComponentChange("reports")}
+                />
                 <span className={Styles.name}>Reports</span>
               </label>
-
               <label className={Styles.radio}>
-                <input type="radio" name="radio" />
+                <input
+                  type="radio"
+                  name="radio"
+                  checked={selectedComponent === "settings"}
+                  onChange={() => handleComponentChange("settings")}
+                />
                 <span className={Styles.name}>Settings</span>
               </label>
             </div>
           </div>
         </div>
         <div className={Styles.container}>
-          <h1 className={Styles.content}>
-            Hi! {currUser.username}, Welcome to our website
-          </h1>
+          <div className={Styles.componentArea}>
+            {/* {selectedComponent === "projects" && <ProjectsComponent />}
+              {selectedComponent === "employees" && <EmployeesComponent />}
+              {selectedComponent === "tasks" && <TasksComponent />} */}
+            {selectedComponent === "reports" && <Reports />}
+            {selectedComponent === "settings" && <Settings currUser={currUser} />}
+          </div>
         </div>
       </div>
       <ToastContainer />
