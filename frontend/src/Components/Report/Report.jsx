@@ -114,7 +114,6 @@ function Report() {
                 onChange={(e) => setStartTime(e.target.value)}
                 className={Styles.input}
               />
-              <button onClick={handleFillTime}>Current</button>
             </div>
           </div>
         </div>
