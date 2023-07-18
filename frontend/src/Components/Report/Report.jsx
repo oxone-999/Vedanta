@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Styles from "../../Styles/Report.module.css";
@@ -8,6 +8,7 @@ function Report() {
   const [vehicle, setVehicle] = useState("");
   const [idleHours, setIdleHours] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  const [startTime, setStartTime] = useState(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -25,6 +26,17 @@ function Report() {
     setIdleHours(event.target.value);
   };
 
+  const handleFillDate = () => {
+    const currentDate = new Date();
+    setSelectedDate(currentDate);
+  };
+
+  const handleFillTime = () => {
+    const today = new Date();
+    const currentTime = today.toLocaleTimeString();
+    setStartTime(currentTime.substring(0, 8) + ".000");
+  };
+
   return (
     <>
       <div className={Styles.container}>
@@ -37,11 +49,12 @@ function Report() {
               onChange={handleDateChange}
               dateFormat="dd/MM/yyyy"
               placeholderText="Select a date"
-              className={Styles.input}
+              className={Styles.dateInput}
             />
+            <button onClick={handleFillDate}>Current</button>
           </div>
           <div className={Styles.content}>
-            <p>Shift No. : {shift}</p>
+            <p>Shift No. : </p>
             <select
               value={shift}
               onChange={handleShift}
@@ -54,13 +67,13 @@ function Report() {
             </select>
           </div>
           <div className={Styles.content}>
-            <p>Vehicle No. : {vehicle}</p>
+            <p>Vehicle No. : </p>
             <select
               value={vehicle}
               onChange={handleVehicle}
               className={Styles.input}
             >
-              <option value="">Select an option</option>
+              <option value="">Select vehicle</option>
               <option value="Ve-3">Ve-3</option>
               <option value="Ve-4">Ve-4</option>
               <option value="Ve-5">Ve-5</option>
@@ -80,31 +93,56 @@ function Report() {
             <div>
               <p>Starting time : </p>
             </div>
-            <div>
-              <input type="time" className={Styles.input} />
+            <div className={Styles.time}>
+              <input
+                type="time"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                className={Styles.input}
+              />
+              <button onClick={handleFillTime}>Current</button>
             </div>
           </div>
           <div className={Styles.content}>
             <div>
-              <p>End time : </p>
+              <p>Ending time : </p>
             </div>
-            <div>
-              <input type="time" className={Styles.input} />
+            <div className={Styles.time}>
+              <input
+                type="time"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                className={Styles.input}
+              />
+              <button onClick={handleFillTime}>Current</button>
             </div>
           </div>
         </div>
         <div className={Styles.section}>
           <div className={Styles.content}>
-            <p>Idle Hours : {idleHours}</p>
+            <p>Idle Hours : </p>
             <select
               value={idleHours}
               onChange={handleIdleHours}
               className={Styles.input}
             >
               <option value="">Select an option</option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="NRT pick up/drop">NRT pick up/drop</option>
+              <option value="Relieving">Relieving</option>
+              <option value="Bad weather/Heavy Rainfall">
+                Bad weather/Heavy Rainfall
+              </option>
+              <option value="Safety Related Pause">Safety Related Pause</option>
+              <option value="No Internal Transport">
+                No Internal Transport
+              </option>
+              <option value="Late Duty Bus">Late Duty Bus</option>
+              <option value="Public/Local Authority Problem">
+                Public/Local Authority Problem
+              </option>
+              <option value="Blasting">Blasting</option>
+              <option value="Union Related Issues">Union Related Issues</option>
+              <option value="Canteen Issue">Canteen Issue</option>
             </select>
           </div>
         </div>

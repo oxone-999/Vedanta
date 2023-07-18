@@ -2,9 +2,9 @@ import { useState } from "react";
 import Styles from "../../Styles/Home.module.css";
 import { isExpired, decodeToken } from "react-jwt";
 import { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
 import Reports from "../Report/Report";
 import Settings from "../Settings/Settings";
+import Employees from "../Employees/Employees";
 
 function Home() {
   const token = localStorage.getItem("token");
@@ -128,15 +128,16 @@ function Home() {
         </div>
         <div className={Styles.container}>
           <div className={Styles.componentArea}>
-            {/* {selectedComponent === "projects" && <ProjectsComponent />}
-              {selectedComponent === "employees" && <EmployeesComponent />}
-              {selectedComponent === "tasks" && <TasksComponent />} */}
+            {/* {selectedComponent === "projects" && <ProjectsComponent />} */}
+            {selectedComponent === "employees" && <Employees />}
+            {/* {selectedComponent === "tasks" && <TasksComponent />} */}
             {selectedComponent === "reports" && <Reports />}
-            {selectedComponent === "settings" && <Settings currUser={currUser} />}
+            {selectedComponent === "settings" && (
+              <Settings currUser={currUser} />
+            )}
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

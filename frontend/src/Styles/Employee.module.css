@@ -1,0 +1,100 @@
+.employee{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    max-height: 27rem;
+    overflow : auto;
+    height: 27rem;
+    width: 60rem;
+    padding-top: 5rem;
+}
+
+.employee::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.employee::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Style the scrollbar thumb (handle) */
+.employee::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 0.25em;
+}
+
+.main{
+    margin:0;
+    padding:0;
+}
+
+.employeeCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 30rem;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    height: 4rem;
+    width: 55rem;
+    margin-top: 1rem;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    flex-grow: 65;
+}
+
+.info h3{
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-left: 1rem;
+}
+
+.info div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 5rem;
+    background-color: #ff6666;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 5px;
+}
+
+.image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    flex-grow : 1;
+}
+
+.image img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.employeeSpace{
+    margin-top: 70rem;
+}

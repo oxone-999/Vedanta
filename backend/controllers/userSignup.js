@@ -4,11 +4,7 @@ const bcrypt = require("bcrypt");
 const Signup = async (req, res) => {
   try {
     const { name, employeeId, password, avatar } = req.body;
-
-    // const images = await cloudinary.uploader.upload(avatar, {
-    //   folder: "avatars-vedanta",
-    // });
-
+    
     const username = await User.findOne({ username: name });
     if (username) {
       res.status(400).json({ error: "Username already exists" });
@@ -26,10 +22,6 @@ const Signup = async (req, res) => {
       username: name,
       employeeId: employeeId,
       password: hashedPassword,
-      // avatar: {
-      //   public_id: images.public_id,
-      //   url: images.secure_url,
-      // },
       avatar: avatar,
     });
 
