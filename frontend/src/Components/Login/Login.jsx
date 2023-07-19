@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Styles from "../../Styles/Login.module.css";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [error, setError] = useState(null);
@@ -30,13 +31,17 @@ export default function Login() {
 
       if (json.status === "ok") {
         localStorage.setItem("token", json.data);
-        toast.success("Login Successful");
+        toast.success("Login Successful",{
+          autoClose: 1000,
+        });
 
         if (json.admin) {
           localStorage.setItem("admin", json.admin);
           console.log(json.admin);
         }
-        window.location = "/";
+        setTimeout(() => {
+          window.location = "/";
+        }, 2000);
       } else {
         setError(json.error);
         alert("Login Failed");

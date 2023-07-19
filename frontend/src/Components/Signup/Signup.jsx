@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Styles from "../../Styles/Signup.module.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { AvatarGenerator } from "random-avatar-generator";
 
 export default function Signup() {
@@ -35,8 +36,10 @@ export default function Signup() {
       const json = await response.json();
 
       if (json.status === "ok") {
-        toast.success("Signup Successful");
-        history("/login");
+        toast.success("Signup Successful", { autoClose: 1000 });
+        setTimeout(() => {
+          window.location = "/login";
+        }, 2000);
       } else {
         toast.error("Signup Failed");
         setError(json.error);
