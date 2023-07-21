@@ -1,32 +1,37 @@
 import React, { useState } from "react";
 import Styles from "../../Styles/Signup.module.css";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AvatarGenerator } from "random-avatar-generator";
 
 export default function Signup() {
-  const generator = new AvatarGenerator();
   const [fullName, setFullName] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
+  const [avatarURL, setAvatarURL] = useState("");
   const [error, setError] = React.useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
 
-  const history = useNavigate();
+  const handleAvatar = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await convertTobase64(file);
+    setAvatarURL(base64);
+    const preview = URL.createObjectURL(file);
+    setPreviewUrl(preview);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch(
-        // "http://localhost:5005/api/auth/signup",
-        "https://vedanta-services.onrender.com/api/auth/signup",
+        "http://localhost:5005/api/auth/signup",
+        // "https://vedanta-services.onrender.com/api/auth/signup",
         {
           method: "POST",
           body: JSON.stringify({
             name: fullName,
             employeeId: employeeId,
             password: password,
-            avatar: generator.generateRandomAvatar(),
+            avatar: avatarURL,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -59,7 +64,15 @@ export default function Signup() {
       <div className={Styles.ccontainer}>
         <div className={Styles.right}>
           <div className={Styles.form_container}>
-            <img src="./authBg.jpg" alt="register" />
+            <input
+              className={Styles.avatarInput}
+              type="file"
+              name="avatar"
+              accept="image/*"
+              onChange={handleAvatar}
+            />
+            <img src={previewUrl} alt="register" />
+            <button className={Styles.avatar}>Edit</button>
             <form onSubmit={handleSubmit}>
               <div className={Styles.container}>
                 <input
@@ -105,4 +118,19 @@ export default function Signup() {
       </div>
     </div>
   );
+}
+
+function convertTobase64(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
 }

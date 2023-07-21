@@ -92,7 +92,7 @@
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    margin-bottom: 1rem;
+    object-fit: cover;
 }
 
 .employeeSpace{

@@ -1,9 +1,14 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const cloudinary = require("cloudinary").v2;
 
 const Signup = async (req, res) => {
   try {
     const { name, employeeId, password, avatar } = req.body;
+
+    const avatarImage = await cloudinary.uploader.upload(avatar, {
+      folder: "avatar",
+    });
     
     const username = await User.findOne({ username: name });
     if (username) {
@@ -22,7 +27,7 @@ const Signup = async (req, res) => {
       username: name,
       employeeId: employeeId,
       password: hashedPassword,
-      avatar: avatar,
+      avatar: avatarImage.secure_url,
     });
 
     const savedUser = await newUser.save();
