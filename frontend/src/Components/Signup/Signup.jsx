@@ -7,9 +7,9 @@ export default function Signup() {
   const [fullName, setFullName] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
-  const [avatarURL, setAvatarURL] = useState("");
+  const [avatarURL, setAvatarURL] = useState("/images/authBg.png");
   const [error, setError] = React.useState(null);
-  const [previewUrl, setPreviewUrl] = useState("");
+  const [previewUrl, setPreviewUrl] = useState("/authBg.jpg");
 
   const handleAvatar = async (event) => {
     const file = event.target.files[0];
@@ -72,7 +72,6 @@ export default function Signup() {
               onChange={handleAvatar}
             />
             <img src={previewUrl} alt="register" />
-            <button className={Styles.avatar}>Edit</button>
             <form onSubmit={handleSubmit}>
               <div className={Styles.container}>
                 <input

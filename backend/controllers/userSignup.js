@@ -6,7 +6,7 @@ const Signup = async (req, res) => {
   try {
     const { name, employeeId, password, avatar } = req.body;
 
-    const avatarImage = await cloudinary.uploader.upload(avatar, {
+    const avatarImage = await cloudinary.uploader.upload(avatar,{
       folder: "avatar",
     });
     
