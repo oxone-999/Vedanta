@@ -12,7 +12,6 @@
     overflow : auto;
     height: 27rem;
     width: 60rem;
-    padding-top: 5rem;
 }
 
 .employee::-webkit-scrollbar {
@@ -95,6 +94,6 @@
     object-fit: cover;
 }
 
-.employeeSpace{
-    margin-top: 83rem;
+.employeeSpace:nth-child(1){
+    margin-top: 2rem;
 }
