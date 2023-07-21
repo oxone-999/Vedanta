@@ -64,13 +64,13 @@ export default function Signup() {
       <div className={Styles.ccontainer}>
         <div className={Styles.right}>
           <div className={Styles.form_container}>
-            <input
+            {/* <input
               className={Styles.avatarInput}
               type="file"
               name="avatar"
               accept="image/*"
               onChange={handleAvatar}
-            />
+            /> */}
             <img src={previewUrl} alt="register" />
             <form onSubmit={handleSubmit}>
               <div className={Styles.container}>
