@@ -23,8 +23,8 @@ export default function Signup() {
     event.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:5005/api/auth/signup",
-        // "https://vedanta-services.onrender.com/api/auth/signup",
+        // "http://localhost:5005/api/auth/signup",
+        "https://vedanta-services.onrender.com/api/auth/signup",
         {
           method: "POST",
           body: JSON.stringify({

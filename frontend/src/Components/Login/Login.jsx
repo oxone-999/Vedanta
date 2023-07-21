@@ -14,8 +14,8 @@ export default function Login() {
 
     try {
       const response = await fetch(
-        "http://localhost:5005/api/auth/login",
-        // "https://vedanta-services.onrender.com/api/auth/login",
+        // "http://localhost:5005/api/auth/login",
+        "https://vedanta-services.onrender.com/api/auth/login",
         {
           method: "POST",
           body: JSON.stringify({
