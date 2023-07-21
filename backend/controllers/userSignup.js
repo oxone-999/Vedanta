@@ -6,10 +6,10 @@ const Signup = async (req, res) => {
   try {
     const { name, employeeId, password, avatar } = req.body;
 
-    const avatarImage = await cloudinary.uploader.upload(avatar,{
-      folder: "avatar",
-    });
-    
+    const avatarImage = {
+      secure_url: "http://www.gravatar.com/avatar/?d=identicon",
+    };
+
     const username = await User.findOne({ username: name });
     if (username) {
       res.status(400).json({ error: "Username already exists" });
