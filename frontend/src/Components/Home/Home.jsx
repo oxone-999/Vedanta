@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import Reports from "../Report/Report";
 import Settings from "../Settings/Settings";
 import Employees from "../Employees/Employees";
+import Projects from "../Projects/Projects";
+import Tasks from "../Tasks/Tasks";
 
 function Home() {
   const token = localStorage.getItem("token");
@@ -128,9 +130,9 @@ function Home() {
         </div>
         <div className={Styles.container}>
           <div className={Styles.componentArea}>
-            {/* {selectedComponent === "projects" && <ProjectsComponent />} */}
+            {selectedComponent === "projects" && <Projects />}
             {selectedComponent === "employees" && <Employees />}
-            {/* {selectedComponent === "tasks" && <TasksComponent />} */}
+            {selectedComponent === "tasks" && <Tasks />}
             {selectedComponent === "reports" && <Reports />}
             {selectedComponent === "settings" && (
               <Settings currUser={currUser} />

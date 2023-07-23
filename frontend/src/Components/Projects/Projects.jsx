@@ -1,16 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Styles from "../../Styles/Report.module.css";
+import Styles from "../../Styles/projects.module.css";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
-function Report() {
+function Projects() {
   const form = useRef(null);
   const [shift, setShift] = useState("");
   const [vehicle, setVehicle] = useState("");
-  const [idleHours, setIdleHours] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [operatorName, setOperatorName] = useState(null);
@@ -20,44 +20,38 @@ function Report() {
   const [startTime, setStartTime] = useState("");
 
   useEffect(() => {
-    const updatedTemplate = ` Date: ${selectedDate} \n Shift: ${shift} \n Vehicle: ${vehicle} \n Idle Hours: ${idleHours} \n Start Time: ${startTime} \n Excavator: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
+    const updatedTemplate = ` Date: ${selectedDate} \n Shift: ${shift} \n Vehicle: ${vehicle} \n Start Time: ${startTime} \n Excavator: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
     setMessage(updatedTemplate);
-  }, [
-    selectedDate,
-    shift,
-    vehicle,
-    idleHours,
-    startTime,
-    operatorName,
-    contact,
-  ]);
+  }, [selectedDate, shift, vehicle, startTime, operatorName, contact]);
 
   const sendEmail = (e) => {
     e.preventDefault();
+    handleSubmit();
 
-    //   emailjs
-    //     .sendForm(
-    //       "service_dg55h57",
-    //       "template_pwdkrwb",
-    //       form.current,
-    //       "pUOFVenh-cRbYqL43"
-    //     )
-    //     .then(
-    //       (result) => {
-    //         console.log(result.text);
-    //       },
-    //       (error) => {
-    //         console.log(error.text);
-    //       }
-    //     );
-    //   toast.success("Report Sent Successfully", { autoClose: 1000 });
-    //   setTimeout(() => {
-    //     window.location = "/";
-    //   }, 2000);
+        emailjs
+          .sendForm(
+            "service_dg55h57",
+            "template_pwdkrwb",
+            form.current,
+            "pUOFVenh-cRbYqL43"
+          )
+          .then(
+            (result) => {
+              console.log(result.text);
+            },
+            (error) => {
+              console.log(error.text);
+            }
+          );
+        toast.success("Report Sent Successfully", { autoClose: 1000 });
+        setTimeout(() => {
+          window.location = "/";
+        }, 2000);
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    const currentDate = new Date(date);
+    setSelectedDate(currentDate);
   };
 
   const handleShift = (event) => {
@@ -66,10 +60,6 @@ function Report() {
 
   const handleVehicle = (event) => {
     setVehicle(event.target.value);
-  };
-
-  const handleIdleHours = (event) => {
-    setIdleHours(event.target.value);
   };
 
   const handleFillDate = () => {
@@ -90,11 +80,35 @@ function Report() {
     setEndTime(currentTime);
   };
 
+  const handleSubmit = async () => {
+    try {
+      const data = {
+        name: operatorName,
+        contact: contact,
+        vehicle: vehicle,
+        shift: shift,
+        date: selectedDate,
+        startTime: startTime,
+      };
+      console.log(data);
+      const response = await axios.post(
+        // `http://localhost:5005/api/excavator`,
+        `https://vedanta-services.onrender.com/api/excavator`,
+        data
+      );
+      console.log(response);
+      toast.success("Excavator Allocated Successfully", { autoClose: 1000 });
+    } catch (error) {
+      console.log(error);
+      toast.error("Error Allocating Excavator", { autoClose: 1000 });
+    }
+  };
+
   return (
     <>
       <ToastContainer />
       <div className={Styles.container}>
-        <div className={Styles.heading}>IDLE SITUATION</div>
+        <div className={Styles.heading}>EXCAVATOR ALLOCATION</div>
         <div className={Styles.section}>
           <div className={Styles.content}>
             <p>Date</p>
@@ -121,7 +135,7 @@ function Report() {
             </select>
           </div>
           <div className={Styles.content}>
-            <p>Vehicle : </p>
+            <p>Excavator : </p>
             <select
               value={vehicle}
               onChange={handleVehicle}
@@ -155,7 +169,7 @@ function Report() {
               <form ref={form} onSubmit={sendEmail} className={Styles.form}>
                 <input
                   className={Styles.input}
-                  style={{ width: "6rem", marginTop: "1rem" }}
+                  style={{ width: "10rem", marginTop: "1rem" }}
                   placeholder="operator name"
                   value={operatorName}
                   type="text"
@@ -164,8 +178,8 @@ function Report() {
                 />
                 <input
                   className={Styles.input}
-                  style={{ width: "5rem", marginTop: "1rem" }}
-                  placeholder="contact"
+                  style={{ width: "10rem", marginTop: "1rem" }}
+                  placeholder="email address"
                   value={contact}
                   type="email"
                   name="user_email"
@@ -173,7 +187,11 @@ function Report() {
                 />
                 <textarea
                   className={Styles.input}
-                  style={{ width: "80rem", height: "55rem", marginTop: "1rem" }}
+                  style={{
+                    width: "120rem",
+                    height: "55rem",
+                    marginTop: "1rem",
+                  }}
                   placeholder="message"
                   type="text"
                   name="message"
@@ -231,36 +249,11 @@ function Report() {
           </div>
         </div>
         <div className={Styles.section}>
-          <div className={Styles.content}>
-            <p>Idle Hours : </p>
-            <select
-              value={idleHours}
-              onChange={handleIdleHours}
-              className={Styles.input}
-            >
-              <option value="">Select an option</option>
-              <option value="NRT pick up/drop">NRT pick up/drop</option>
-              <option value="Relieving">Relieving</option>
-              <option value="Bad weather/Heavy Rainfall">
-                Bad weather/Heavy Rainfall
-              </option>
-              <option value="Safety Related Pause">Safety Related Pause</option>
-              <option value="No Internal Transport">
-                No Internal Transport
-              </option>
-              <option value="Late Duty Bus">Late Duty Bus</option>
-              <option value="Public/Local Authority Problem">
-                Public/Local Authority Problem
-              </option>
-              <option value="Blasting">Blasting</option>
-              <option value="Union Related Issues">Union Related Issues</option>
-              <option value="Canteen Issue">Canteen Issue</option>
-            </select>
-          </div>
+          <div className={Styles.content}></div>
         </div>
       </div>
     </>
   );
 }
 
-export default Report;
+export default Projects;

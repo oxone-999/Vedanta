@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,8 +11,8 @@ function Employees() {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        // const response = await axios.get(`http://localhost:5005/api/employees`);
         const response = await axios.get(
+          // `http://localhost:5005/api/excavator`
           `https://vedanta-services.onrender.com/api/employees`
         );
         setData(response.data.data);
