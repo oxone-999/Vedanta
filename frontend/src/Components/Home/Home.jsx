@@ -7,6 +7,7 @@ import Settings from "../Settings/Settings";
 import Employees from "../Employees/Employees";
 import Projects from "../Projects/Projects";
 import Tasks from "../Tasks/Tasks";
+import IdleHours from "../IdleHours/IdleHours";
 
 function Home() {
   const token = localStorage.getItem("token");
@@ -111,6 +112,15 @@ function Home() {
                 <input
                   type="radio"
                   name="radio"
+                  checked={selectedComponent === "idleHours"}
+                  onChange={() => handleComponentChange("idleHours")}
+                />
+                <span className={Styles.name}>IdleHours</span>
+              </label>
+              <label className={Styles.radio}>
+                <input
+                  type="radio"
+                  name="radio"
                   checked={selectedComponent === "reports"}
                   onChange={() => handleComponentChange("reports")}
                 />
@@ -133,6 +143,7 @@ function Home() {
             {selectedComponent === "projects" && <Projects />}
             {selectedComponent === "employees" && <Employees />}
             {selectedComponent === "tasks" && <Tasks />}
+            {selectedComponent === "idleHours" && <IdleHours />}
             {selectedComponent === "reports" && <Reports />}
             {selectedComponent === "settings" && (
               <Settings currUser={currUser} />

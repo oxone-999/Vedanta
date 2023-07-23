@@ -148,3 +148,35 @@
   justify-content: center;
 }
 
+.List{
+  display: flex;
+  width: 50%;
+}
+
+.options{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+
+.options h3{
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ff6565;
+  border: 3px solid #ff6565;
+  border-radius: 10rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.options h3:hover{
+  transition: all 0.3s ease-in-out;
+  background-color: #6eff73;
+  border: 3px solid #6eff73;
+  color: #7e7e7e;
+  cursor: pointer;
+}

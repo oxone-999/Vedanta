@@ -8,6 +8,34 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 function Projects() {
+  const excavatorList = [{ id: "", name: "Excavator" }];
+
+  for (let i = 3; i <= 14; i++) {
+    const id = i < 10 ? `VE-${i}` : `KVE-${i}`;
+    excavatorList.push({ id, name: id });
+  }
+
+  const ripperDozerList = [
+    { id: "", name: "Ripper Dozer" },
+    { id: "RD-2", name: "RD-2" },
+    { id: "RD-3", name: "RD-3" },
+    { id: "RD-11", name: "RD-11" },
+    { id: "RD-12", name: "RD-12" },
+    { id: "RD-13", name: "RD-13" },
+  ];
+
+  const wheelLoaderList = [{ id: "", name: "Wheel Loader" }];
+
+  for (let i = 1; i <= 11; i++) {
+    wheelLoaderList.push({ id: `VL-H${i}`, name: `VL-H${i}` });
+  }
+
+  const volvoTruckList = [{ id: "", name: "Volvo Truck" }];
+
+  for (let i = 1; i <= 55; i++) {
+    volvoTruckList.push({ id: `VT-${i}`, name: `VT-${i}` });
+  }
+
   const form = useRef(null);
   const [shift, setShift] = useState("");
   const [vehicle, setVehicle] = useState("");
@@ -18,35 +46,50 @@ function Projects() {
   const [message, setMessage] = useState("");
   const [formOpen, setForm] = useState(false);
   const [startTime, setStartTime] = useState("");
+  const [vehicleList, setVehicleList] = useState(excavatorList);
 
   useEffect(() => {
-    const updatedTemplate = ` Date: ${selectedDate} \n Shift: ${shift} \n Vehicle: ${vehicle} \n Start Time: ${startTime} \n Excavator: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
+    if (!selectedDate) return;
+    const formatDate = selectedDate.toLocaleDateString();
+    const updatedTemplate = ` Date: ${formatDate} \n Shift: ${shift} \n Vehicle: ${vehicleList[0].name} \n Start Time: ${startTime} \n ${vehicleList[0].name}: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
     setMessage(updatedTemplate);
-  }, [selectedDate, shift, vehicle, startTime, operatorName, contact]);
+  }, [selectedDate, shift, vehicle, startTime, operatorName, contact, vehicleList]);
+
+  const handleOptions = (event) => {
+    if (event === "Excavator") {
+      setVehicleList(excavatorList);
+    } else if (event === "Ripper Dozer") {
+      setVehicleList(ripperDozerList);
+    } else if (event === "Wheel loader") {
+      setVehicleList(wheelLoaderList);
+    } else if (event === "Volvo trucks") {
+      setVehicleList(volvoTruckList);
+    }
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
     handleSubmit();
 
-        emailjs
-          .sendForm(
-            "service_dg55h57",
-            "template_pwdkrwb",
-            form.current,
-            "pUOFVenh-cRbYqL43"
-          )
-          .then(
-            (result) => {
-              console.log(result.text);
-            },
-            (error) => {
-              console.log(error.text);
-            }
-          );
-        toast.success("Report Sent Successfully", { autoClose: 1000 });
-        setTimeout(() => {
-          window.location = "/";
-        }, 2000);
+    emailjs
+      .sendForm(
+        "service_dg55h57",
+        "template_pwdkrwb",
+        form.current,
+        "pUOFVenh-cRbYqL43"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    toast.success("Report Sent Successfully", { autoClose: 1000 });
+    setTimeout(() => {
+      window.location = "/";
+    }, 2000);
   };
 
   const handleDateChange = (date) => {
@@ -109,6 +152,14 @@ function Projects() {
       <ToastContainer />
       <div className={Styles.container}>
         <div className={Styles.heading}>EXCAVATOR ALLOCATION</div>
+        <div className={Styles.List}>
+          <div className={Styles.options}>
+            <h3 onClick={() => handleOptions("Excavator")}>Excavator</h3>
+            <h3 onClick={() => handleOptions("Ripper Dozer")}>Ripper Dozer</h3>
+            <h3 onClick={() => handleOptions("Wheel loader")}>Wheel loader</h3>
+            <h3 onClick={() => handleOptions("Volvo trucks")}>Volvo trucks</h3>
+          </div>
+        </div>
         <div className={Styles.section}>
           <div className={Styles.content}>
             <p>Date</p>
@@ -129,31 +180,25 @@ function Projects() {
               className={Styles.input}
             >
               <option value="">Select an option</option>
-              <option value="option1">1</option>
-              <option value="option2">2</option>
-              <option value="option3">3</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
             </select>
           </div>
           <div className={Styles.content}>
-            <p>Excavator : </p>
+            <p> {vehicleList[0].name} : </p>
             <select
               value={vehicle}
               onChange={handleVehicle}
               className={Styles.input}
               style={{ width: "7rem" }}
             >
-              <option value="">Excavator</option>
-              <option value="Ve-3">Ve-3</option>
-              <option value="Ve-4">Ve-4</option>
-              <option value="Ve-5">Ve-5</option>
-              <option value="Ve-6">Ve-6</option>
-              <option value="Ve-7">Ve-7</option>
-              <option value="KVE-9">KVE-9</option>
-              <option value="KVE-10">KVE-10</option>
-              <option value="KVE-11">KVE-11</option>
-              <option value="KVE-12">KVE-12</option>
-              <option value="KVE-13">KVE-13</option>
-              <option value="KVE-14">KVE-14</option>
+              <option value="">{vehicleList[0].name}</option>
+              {vehicleList.slice(1).map((vehicle) => (
+                <option key={vehicle._id} value={vehicle.name}>
+                  {vehicle.name}
+                </option>
+              ))}
             </select>
 
             <button

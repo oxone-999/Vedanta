@@ -1,59 +1,48 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Styles from "../../Styles/Report.module.css";
-import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function Report() {
-  const form = useRef(null);
   const [shift, setShift] = useState("");
   const [vehicle, setVehicle] = useState("");
   const [idleHours, setIdleHours] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [endTime, setEndTime] = useState(null);
-  const [operatorName, setOperatorName] = useState(null);
-  const [contact, setContact] = useState(null);
-  const [message, setMessage] = useState("");
-  const [formOpen, setForm] = useState(false);
   const [startTime, setStartTime] = useState("");
+  const [timeDiff, setTimeDiff] = useState("");
 
-  useEffect(() => {
-    const updatedTemplate = ` Date: ${selectedDate} \n Shift: ${shift} \n Vehicle: ${vehicle} \n Idle Hours: ${idleHours} \n Start Time: ${startTime} \n Excavator: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
-    setMessage(updatedTemplate);
-  }, [
-    selectedDate,
-    shift,
-    vehicle,
-    idleHours,
-    startTime,
-    operatorName,
-    contact,
-  ]);
+  // useEffect(() => {
+  //   if (!selectedDate) return;
+  //   const formatDate = selectedDate.toLocaleDateString();
+  //   const updatedTemplate = ` Date: ${formatDate} \n Shift: ${shift} \n Vehicle: Excavator \n Start Time: ${startTime} \n Exacvator: ${vehicle} \n Idle Hours Reason: ${idleHours}`;
+  //   setMessage(updatedTemplate);
+  // }, [selectedDate, shift, vehicle, startTime, idleHours]);
 
-  const sendEmail = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //   emailjs
-    //     .sendForm(
-    //       "service_dg55h57",
-    //       "template_pwdkrwb",
-    //       form.current,
-    //       "pUOFVenh-cRbYqL43"
-    //     )
-    //     .then(
-    //       (result) => {
-    //         console.log(result.text);
-    //       },
-    //       (error) => {
-    //         console.log(error.text);
-    //       }
-    //     );
-    //   toast.success("Report Sent Successfully", { autoClose: 1000 });
-    //   setTimeout(() => {
-    //     window.location = "/";
-    //   }, 2000);
+    try {
+      const response = await axios.post(
+        // "http://localhost:5005/api/idlehours",
+        "https://vedanta-services.onrender.com/api/idlehours",
+        {
+          name: vehicle,
+          shift: shift,
+          time: timeDiff,
+          startTime: startTime,
+          date: selectedDate,
+        }
+      );
+      toast.success("Idle Situation Submitted Successfully");
+      const json = await response.json();
+      console.log("Success:", JSON.stringify(json));
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleDateChange = (date) => {
@@ -89,6 +78,23 @@ function Report() {
     console.log(currentTime);
     setEndTime(currentTime);
   };
+
+  const calculateTimeDifference = (startTime, endTime) => {
+    if (!startTime || !endTime) return;
+
+    const startTimeObj = new Date(`01/01/2000 ${startTime}`);
+    const endTimeObj = new Date(`01/01/2000 ${endTime}`);
+
+    const timeDifference = endTimeObj - startTimeObj;
+    const hours = Math.floor(timeDifference / 3600000); // 1 hour = 3600000 milliseconds
+    const minutes = Math.floor((timeDifference % 3600000) / 60000); // 1 minute = 60000 milliseconds
+
+    setTimeDiff(`${hours} hours ${minutes} minutes`);
+  };
+
+  useEffect(() => {
+    calculateTimeDifference(startTime, endTime);
+  }, [startTime, endTime]);
 
   return (
     <>
@@ -142,62 +148,9 @@ function Report() {
               <option value="KVE-14">KVE-14</option>
             </select>
 
-            <button
-              type="button"
-              onClick={() => {
-                setForm(true);
-              }}
-            >
-              Send
+            <button type="button" onClick={handleSubmit}>
+              Submit
             </button>
-
-            {formOpen && (
-              <form ref={form} onSubmit={sendEmail} className={Styles.form}>
-                <input
-                  className={Styles.input}
-                  style={{ width: "6rem", marginTop: "1rem" }}
-                  placeholder="operator name"
-                  value={operatorName}
-                  type="text"
-                  name="user_name"
-                  onChange={(e) => setOperatorName(e.target.value)}
-                />
-                <input
-                  className={Styles.input}
-                  style={{ width: "5rem", marginTop: "1rem" }}
-                  placeholder="contact"
-                  value={contact}
-                  type="email"
-                  name="user_email"
-                  onChange={(e) => setContact(e.target.value)}
-                />
-                <textarea
-                  className={Styles.input}
-                  style={{ width: "80rem", height: "55rem", marginTop: "1rem" }}
-                  placeholder="message"
-                  type="text"
-                  name="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                />
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setForm(false);
-                    }}
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="submit"
-                    style={{ backgroundColor: "#90EE90", color: "#414141" }}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            )}
           </div>
         </div>
         <div className={Styles.section}>

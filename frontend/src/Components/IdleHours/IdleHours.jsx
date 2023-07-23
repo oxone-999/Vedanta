@@ -5,11 +5,11 @@ import axios from "axios";
 import Styles from "../../Styles/tasks.module.css";
 import { formatDistanceToNow } from "date-fns";
 
-const Tasks = () => {
+const IdleHours = () => {
   const [data, setData] = React.useState([]);
 
   const handleDownload = () => {
-    const filename = "Operator Allocation.csv";
+    const filename = "Idle Hours Allocation.csv";
     convertObjectToCSVAndDownload(data, filename);
   };
 
@@ -25,10 +25,10 @@ const Tasks = () => {
     const fetchEmployees = async () => {
       try {
         const response = await axios.get(
-          // `http://localhost:5005/api/excavator`
-          `https://vedanta-services.onrender.com/api/excavator`
+        //   `http://localhost:5005/api/idlehours`
+          `https://vedanta-services.onrender.com/api/idlehours`
         );
-        setData(response.data.excavators);
+        setData(response.data.idleHours);
         console.log("data", response.data.excavators);
       } catch (error) {
         console.log(error);
@@ -40,7 +40,7 @@ const Tasks = () => {
   return (
     <div className={Styles.main}>
       <ToastContainer />
-      <h2>Operator Allocation</h2>
+      <h2>Idle Hours Allocation</h2>
       <div className={Styles.employee}>
         <div className={Styles.download} onClick={handleDownload}></div>
         <div className={Styles.employeeSpace}>
@@ -59,30 +59,23 @@ const Tasks = () => {
                       <h3>{excavator.name}</h3>
                     </div>
                     <div className={Styles.field}>
-                      <h3>Allocated Vehicle : </h3>
-                      <h3>{excavator.vehicle}</h3>
+                      <h3>Reason : </h3>
+                      <h3>{excavator.reason}</h3>
                     </div>
                     <div className={Styles.field}>
-                      <h3>Contact : </h3>
-                      <h3>{excavator.contact}</h3>
+                      <h3>Time Difference : </h3>
+                      <h3>{excavator.time}</h3>
                     </div>
                     <div className={Styles.field}>
-                      <h3>Shift NO. : </h3>
+                      <h3>Shift No. : </h3>
                       <h3>{excavator.shift}</h3>
                     </div>
                     <div className={Styles.field}>
-                      <h3>Starting Time : </h3>
-                      <h3>{excavator.startTime}</h3>
+                      <h3>Dated : </h3>
+                      <h3>{excavator.Date}</h3>
                     </div>
                   </div>
-                  <div className={Styles.signed}>
-                    <h3>Operator Signature</h3>
-                    <div className={Styles.date}>
-                      <p>Dated : {excavator.Date.substr(0, 10)}</p>
-                      <p>Created : {formatTime(excavator.Date)}</p>
-                      <p className={Styles.sign}>not signed</p>
-                    </div>
-                  </div>
+                  <div className={Styles.signed}></div>
                 </div>
               </>
             ))}
@@ -130,4 +123,4 @@ function convertObjectToCSV(data) {
   return csvRows.join("\n");
 }
 
-export default Tasks;
+export default IdleHours;
