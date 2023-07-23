@@ -31,9 +31,9 @@ function Report() {
         "https://vedanta-services.onrender.com/api/idlehours",
         {
           name: vehicle,
-          shift: shift,
+          reason: idleHours,
           time: timeDiff,
-          startTime: startTime,
+          shift: shift,
           date: selectedDate,
         }
       );
