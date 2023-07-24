@@ -140,6 +140,7 @@ function Report() {
                 onChange={handleVehicle}
                 className={Styles.input}
                 style={{ width: "7rem" }}
+                required
               >
                 <option value="">Excavator</option>
                 <option value="Ve-3">Ve-3</option>
@@ -199,6 +200,7 @@ function Report() {
                 value={idleHours}
                 onChange={handleIdleHours}
                 className={Styles.input}
+                required
               >
                 <option value="">Select an option</option>
                 <option value="NRT pick up/drop">NRT pick up/drop</option>
