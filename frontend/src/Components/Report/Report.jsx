@@ -11,7 +11,7 @@ function Report() {
   const [vehicle, setVehicle] = useState("");
   const [idleHours, setIdleHours] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const [endTime, setEndTime] = useState(null);
+  const [endTime, setEndTime] = useState("");
   const [startTime, setStartTime] = useState("");
   const [timeDiff, setTimeDiff] = useState("");
 
@@ -25,17 +25,21 @@ function Report() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const data = {
+      name: vehicle,
+      reason: idleHours,
+      time: timeDiff,
+      shift: shift,
+      date: selectedDate,
+    };
+
+    console.log(data);
+
     try {
       const response = await axios.post(
         // "http://localhost:5005/api/idlehours",
         "https://vedanta-services.onrender.com/api/idlehours",
-        {
-          name: vehicle,
-          reason: idleHours,
-          time: timeDiff,
-          shift: shift,
-          date: selectedDate,
-        }
+        data
       );
       toast.success("Idle Situation Submitted Successfully");
       const json = await response.json();
