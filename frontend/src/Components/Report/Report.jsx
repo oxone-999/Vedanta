@@ -15,13 +15,6 @@ function Report() {
   const [startTime, setStartTime] = useState("");
   const [timeDiff, setTimeDiff] = useState("");
 
-  // useEffect(() => {
-  //   if (!selectedDate) return;
-  //   const formatDate = selectedDate.toLocaleDateString();
-  //   const updatedTemplate = ` Date: ${formatDate} \n Shift: ${shift} \n Vehicle: Excavator \n Start Time: ${startTime} \n Exacvator: ${vehicle} \n Idle Hours Reason: ${idleHours}`;
-  //   setMessage(updatedTemplate);
-  // }, [selectedDate, shift, vehicle, startTime, idleHours]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -112,7 +105,7 @@ function Report() {
               <DatePicker
                 selected={selectedDate}
                 onChange={handleDateChange}
-                dateFormat="dd/MM/yyyy"
+                dateFormat="MM/dd/yyyy"
                 placeholderText="Select a date"
                 className={Styles.dateInput}
                 required

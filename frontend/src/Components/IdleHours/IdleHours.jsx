@@ -29,7 +29,7 @@ const IdleHours = () => {
           `https://vedanta-services.onrender.com/api/idlehours`
         );
         setData(response.data.idleHours);
-        console.log("data", response.data.excavators);
+        console.log("data", response.data.idleHours);
       } catch (error) {
         console.log(error);
       }
@@ -72,7 +72,7 @@ const IdleHours = () => {
                     </div>
                     <div className={Styles.field}>
                       <h3>Dated : </h3>
-                      <h3>{excavator.Date}</h3>
+                      <h3>{excavator.date}</h3>
                     </div>
                   </div>
                   <div className={Styles.signed}></div>
