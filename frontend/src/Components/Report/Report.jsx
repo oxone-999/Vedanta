@@ -121,9 +121,9 @@ function Report() {
                 required
               >
                 <option value="">Select an option</option>
-                <option value="option1">1</option>
-                <option value="option2">2</option>
-                <option value="option3">3</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
               </select>
             </div>
             <div className={Styles.content}>
