@@ -74,7 +74,6 @@ function Projects() {
     }
     const newDate = new Date(date);
 
-    // Get the options for formatting only the date in IST
     const options = {
       timeZone: "Asia/Kolkata",
       year: "numeric",
@@ -82,7 +81,6 @@ function Projects() {
       day: "2-digit",
     };
 
-    // Format the date in IST
     const formattedDate = newDate.toLocaleString("en-IN", options);
     return formattedDate;
   };
