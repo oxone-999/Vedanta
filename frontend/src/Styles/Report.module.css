@@ -1,69 +1,70 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    height: 37rem;
-    width: 75rem;
-    flex-grow: 2;
-    color: #313131;
-    font-size: 1rem;
-    font-weight: 200;
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 37rem;
+  width: 75rem;
+  flex-grow: 2;
+  color: #313131;
+  font-size: 1rem;
+  font-weight: 200;
 }
 
-.heading{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 1rem;
-    width: 20rem;
-    margin: 1rem;
-    padding: 1rem;
-    color: #313131;
-    font-weight: 700;
+.heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 1rem;
+  width: 20rem;
+  margin: 1rem;
+  margin-bottom: 7rem;
+  padding: 1rem;
+  color: #313131;
+  font-weight: 700;
 }
 
-.content{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 3rem;
-    margin: 0.2rem;
-    padding: 0.3rem;
-    color: #313131;
-    font-weight: 700;
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  margin: 0.2rem;
+  padding: 0.3rem;
+  color: #313131;
+  font-weight: 700;
 }
 
-.content button{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 0.5rem;
-    width: 5rem;
-    margin: 2rem;
-    padding: 1rem;
-    color: #f5f5f5;
-    font-weight: 700;
-    background-color: #ff6666;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+.content button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 0.5rem;
+  width: 5rem;
+  margin: 2rem;
+  padding: 1rem;
+  color: #f5f5f5;
+  font-weight: 700;
+  background-color: #ff6666;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.time{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 20rem;
-    height: 4rem;
+.time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 20rem;
+  height: 4rem;
 }
 
-.dateInput{
+.dateInput {
   max-width: 70px;
   padding: 12px;
   border: none;
@@ -107,30 +108,30 @@
   }
 }
 
-.content p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 1rem 0 0;
-    font-size: 1rem;
-    font-weight: 700;
+.content p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
-.section{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:space-evenly;
-    height: 3rem;
-    flex-grow: 2;
-    width: 70rem;
-    margin: 2rem;
-    padding: 1rem;
-    color: #313131;
-    font-weight: 700;
+.section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 3rem;
+  flex-grow: 2;
+  width: 70rem;
+  margin: 2rem;
+  padding: 1rem;
+  color: #313131;
+  font-weight: 700;
 }
 
-.form{
+.form {
   /* write css for modal type, int he center iwht backgorund blur */
   position: fixed;
   top: 50%;
@@ -140,11 +141,10 @@
   width: 50%;
   height: 50%;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-
