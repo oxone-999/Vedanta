@@ -74,15 +74,12 @@ function Projects() {
     }
     const newDate = new Date(date);
 
-    // Get the options for formatting the date in IST
+    // Get the options for formatting only the date in IST
     const options = {
       timeZone: "Asia/Kolkata",
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
     };
 
     // Format the date in IST
