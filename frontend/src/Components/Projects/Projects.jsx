@@ -50,8 +50,13 @@ function Projects() {
 
   useEffect(() => {
     if (!selectedDate) return;
-    const formatDate = selectedDate.toLocaleDateString();
-    const updatedTemplate = ` Date: ${formatDate} \n Shift: ${shift} \n Vehicle: ${vehicleList[0].name} \n Start Time: ${startTime} \n ${vehicleList[0].name}: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
+    const updatedTemplate = ` Date: ${formatTime(
+      selectedDate
+    )} \n Shift: ${shift} \n Vehicle: ${
+      vehicleList[0].name
+    } \n Start Time: ${startTime} \n ${
+      vehicleList[0].name
+    }: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
     setMessage(updatedTemplate);
   }, [
     selectedDate,
@@ -62,6 +67,28 @@ function Projects() {
     contact,
     vehicleList,
   ]);
+
+  const formatTime = (date) => {
+    if (!date) {
+      return "";
+    }
+    const newDate = new Date(date);
+
+    // Get the options for formatting the date in IST
+    const options = {
+      timeZone: "Asia/Kolkata",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+
+    // Format the date in IST
+    const formattedDate = newDate.toLocaleString("en-IN", options);
+    return formattedDate;
+  };
 
   const handleOptions = (event) => {
     if (event === "Excavator") {
