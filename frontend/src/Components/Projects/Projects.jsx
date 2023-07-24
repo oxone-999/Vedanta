@@ -53,7 +53,15 @@ function Projects() {
     const formatDate = selectedDate.toLocaleDateString();
     const updatedTemplate = ` Date: ${formatDate} \n Shift: ${shift} \n Vehicle: ${vehicleList[0].name} \n Start Time: ${startTime} \n ${vehicleList[0].name}: ${vehicle} \n Operator Name: ${operatorName} \n Contact: ${contact}`;
     setMessage(updatedTemplate);
-  }, [selectedDate, shift, vehicle, startTime, operatorName, contact, vehicleList]);
+  }, [
+    selectedDate,
+    shift,
+    vehicle,
+    startTime,
+    operatorName,
+    contact,
+    vehicleList,
+  ]);
 
   const handleOptions = (event) => {
     if (event === "Excavator") {
@@ -169,6 +177,7 @@ function Projects() {
               dateFormat="dd/MM/yyyy"
               placeholderText="Select a date"
               className={Styles.dateInput}
+              required
             />
             <button onClick={handleFillDate}>Current</button>
           </div>
@@ -178,6 +187,7 @@ function Projects() {
               value={shift}
               onChange={handleShift}
               className={Styles.input}
+              required
             >
               <option value="">Select an option</option>
               <option value="1">1</option>
@@ -192,6 +202,7 @@ function Projects() {
               onChange={handleVehicle}
               className={Styles.input}
               style={{ width: "7rem" }}
+              required
             >
               <option value="">{vehicleList[0].name}</option>
               {vehicleList.slice(1).map((vehicle) => (
@@ -220,6 +231,7 @@ function Projects() {
                   type="text"
                   name="user_name"
                   onChange={(e) => setOperatorName(e.target.value)}
+                  required
                 />
                 <input
                   className={Styles.input}
@@ -229,6 +241,7 @@ function Projects() {
                   type="email"
                   name="user_email"
                   onChange={(e) => setContact(e.target.value)}
+                  required
                 />
                 <textarea
                   className={Styles.input}
@@ -242,6 +255,7 @@ function Projects() {
                   name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
+                  required
                 />
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <button
