@@ -13,19 +13,11 @@ const IdleHours = () => {
     convertObjectToCSVAndDownload(data, filename);
   };
 
-  const formatTime = (date) => {
-    const newDate = new Date(date);
-    const formattedTimeDifference = formatDistanceToNow(newDate, {
-      addSuffix: true,
-    });
-    return formattedTimeDifference;
-  };
-
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
         const response = await axios.get(
-        //   `http://localhost:5005/api/idlehours`
+          //   `http://localhost:5005/api/idlehours`
           `https://vedanta-services.onrender.com/api/idlehours`
         );
         setData(response.data.idleHours);
@@ -36,6 +28,28 @@ const IdleHours = () => {
     };
     fetchEmployees();
   }, []);
+
+  const formatTime = (date) => {
+    if (!date) {
+      return "";
+    }
+    const newDate = new Date(date);
+
+    // Get the options for formatting the date in IST
+    const options = {
+      timeZone: "Asia/Kolkata",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+
+    // Format the date in IST
+    const formattedDate = newDate.toLocaleString("en-IN", options);
+    return formattedDate;
+  };
 
   return (
     <div className={Styles.main}>
@@ -72,7 +86,7 @@ const IdleHours = () => {
                     </div>
                     <div className={Styles.field}>
                       <h3>Dated : </h3>
-                      <h3>{excavator.date}</h3>
+                      <h3>{formatTime(excavator.date)}</h3>
                     </div>
                   </div>
                   <div className={Styles.signed}></div>

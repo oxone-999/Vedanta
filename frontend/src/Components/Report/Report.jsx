@@ -105,7 +105,7 @@ function Report() {
               <DatePicker
                 selected={selectedDate}
                 onChange={handleDateChange}
-                dateFormat="MM/dd/yyyy"
+                dateFormat="dd/MM/yyyy"
                 placeholderText="Select a date"
                 className={Styles.dateInput}
                 required
@@ -149,9 +149,7 @@ function Report() {
                 <option value="KVE-14">KVE-14</option>
               </select>
 
-              <button type="submit">
-                Submit
-              </button>
+              <button type="submit">Submit</button>
             </div>
           </div>
           <div className={Styles.section}>

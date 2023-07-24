@@ -101,8 +101,7 @@ function Projects() {
   };
 
   const handleDateChange = (date) => {
-    const currentDate = new Date(date);
-    setSelectedDate(currentDate);
+    setSelectedDate(date);
   };
 
   const handleShift = (event) => {
