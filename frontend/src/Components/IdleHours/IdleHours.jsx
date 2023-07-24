@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import Styles from "../../Styles/tasks.module.css";
+import Styles from "../../Styles/idleHours.module.css";
 import { formatDistanceToNow } from "date-fns";
 
 const IdleHours = () => {
