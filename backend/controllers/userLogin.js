@@ -5,6 +5,8 @@ const Login = async (req, res) => {
   try {
     const { employeeId, password } = req.body;
 
+    console.log(req.body);
+
     const user = await User.findOne({ employeeId: employeeId });
     if (!user) {
       return res.status(400).json({ error: "User does not exist" });
