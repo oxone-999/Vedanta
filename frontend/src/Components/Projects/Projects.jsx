@@ -10,43 +10,43 @@ import axios from "axios";
 function Projects() {
   const DrillsList = [{ id: "", name: "Production Drills" }];
 
-  for (let i = 3; i <= 14; i++) {
-    const id = i < 10 ? `VE-${i}` : `KVE-${i}`;
-    DrillsList.push({ id, name: id });
-  }
+  // for (let i = 3; i <= 14; i++) {
+  //   const id = i < 10 ? `VE-${i}` : `KVE-${i}`;
+  //   DrillsList.push({ id, name: id });
+  // }
 
   const JumbosList = [
     { id: "", name: "Jumbos" },
-    { id: "RD-2", name: "RD-2" },
-    { id: "RD-3", name: "RD-3" },
-    { id: "RD-11", name: "RD-11" },
-    { id: "RD-12", name: "RD-12" },
-    { id: "RD-13", name: "RD-13" },
+    // { id: "RD-2", name: "RD-2" },
+    // { id: "RD-3", name: "RD-3" },
+    // { id: "RD-11", name: "RD-11" },
+    // { id: "RD-12", name: "RD-12" },
+    // { id: "RD-13", name: "RD-13" },
   ];
 
   const LHDList = [{ id: "", name: "LHD" }];
 
-  for (let i = 1; i <= 11; i++) {
-    LHDList.push({ id: `VL-H${i}`, name: `VL-H${i}` });
-  }
+  // for (let i = 1; i <= 11; i++) {
+  //   LHDList.push({ id: `VL-H${i}`, name: `VL-H${i}` });
+  // }
 
   const LPDTList = [{ id: "", name: "LPDT" }];
 
-  for (let i = 1; i <= 55; i++) {
-    LPDTList.push({ id: `VT-${i}`, name: `VT-${i}` });
-  }
+  // for (let i = 1; i <= 55; i++) {
+  //   LPDTList.push({ id: `VT-${i}`, name: `VT-${i}` });
+  // }
 
   const CharmacList = [{ id: "", name: "Charmac" }];
 
-  for (let i = 1; i <= 55; i++) {
-    CharmacList.push({ id: `VT-${i}`, name: `VT-${i}` });
-  }
+  // for (let i = 1; i <= 55; i++) {
+  //   CharmacList.push({ id: `VT-${i}`, name: `VT-${i}` });
+  // }
 
   const ScalarList = [{ id: "", name: "Scalar" }];
 
-  for (let i = 1; i <= 55; i++) {
-    ScalarList.push({ id: `VT-${i}`, name: `VT-${i}` });
-  }
+  // for (let i = 1; i <= 55; i++) {
+  //   ScalarList.push({ id: `VT-${i}`, name: `VT-${i}` });
+  // }
 
   const form = useRef(null);
   const [shift, setShift] = useState("");
