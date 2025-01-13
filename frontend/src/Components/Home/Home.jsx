@@ -77,7 +77,7 @@ function Home() {
       <div className={Styles.main}>
         <div className={Styles.navbar}>
           <div className={Styles.navbar__left}>
-            <img className={Styles.logo} src="Vedant.png" alt="logo" />
+            <img className={Styles.logo} src="Vedanta.png" alt="logo" />
           </div>
           <div className={Styles.navbar__right}>
             <div className={Styles.radio_inputs}>
