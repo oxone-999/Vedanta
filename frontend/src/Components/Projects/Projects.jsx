@@ -8,15 +8,15 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 function Projects() {
-  const excavatorList = [{ id: "", name: "Excavator" }];
+  const DrillsList = [{ id: "", name: "Production Drills" }];
 
   for (let i = 3; i <= 14; i++) {
     const id = i < 10 ? `VE-${i}` : `KVE-${i}`;
-    excavatorList.push({ id, name: id });
+    DrillsList.push({ id, name: id });
   }
 
-  const ripperDozerList = [
-    { id: "", name: "Ripper Dozer" },
+  const JumbosList = [
+    { id: "", name: "Jumbos" },
     { id: "RD-2", name: "RD-2" },
     { id: "RD-3", name: "RD-3" },
     { id: "RD-11", name: "RD-11" },
@@ -24,16 +24,28 @@ function Projects() {
     { id: "RD-13", name: "RD-13" },
   ];
 
-  const wheelLoaderList = [{ id: "", name: "Wheel Loader" }];
+  const LHDList = [{ id: "", name: "LHD" }];
 
   for (let i = 1; i <= 11; i++) {
-    wheelLoaderList.push({ id: `VL-H${i}`, name: `VL-H${i}` });
+    LHDList.push({ id: `VL-H${i}`, name: `VL-H${i}` });
   }
 
-  const volvoTruckList = [{ id: "", name: "Volvo Truck" }];
+  const LPDTList = [{ id: "", name: "LPDT" }];
 
   for (let i = 1; i <= 55; i++) {
-    volvoTruckList.push({ id: `VT-${i}`, name: `VT-${i}` });
+    LPDTList.push({ id: `VT-${i}`, name: `VT-${i}` });
+  }
+
+  const CharmacList = [{ id: "", name: "Charmac" }];
+
+  for (let i = 1; i <= 55; i++) {
+    CharmacList.push({ id: `VT-${i}`, name: `VT-${i}` });
+  }
+
+  const ScalarList = [{ id: "", name: "Scalar" }];
+
+  for (let i = 1; i <= 55; i++) {
+    ScalarList.push({ id: `VT-${i}`, name: `VT-${i}` });
   }
 
   const form = useRef(null);
@@ -46,7 +58,7 @@ function Projects() {
   const [message, setMessage] = useState("");
   const [formOpen, setForm] = useState(false);
   const [startTime, setStartTime] = useState("");
-  const [vehicleList, setVehicleList] = useState(excavatorList);
+  const [vehicleList, setVehicleList] = useState(DrillsList);
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -86,14 +98,18 @@ function Projects() {
   };
 
   const handleOptions = (event) => {
-    if (event === "Excavator") {
-      setVehicleList(excavatorList);
-    } else if (event === "Ripper Dozer") {
-      setVehicleList(ripperDozerList);
-    } else if (event === "Wheel loader") {
-      setVehicleList(wheelLoaderList);
-    } else if (event === "Volvo trucks") {
-      setVehicleList(volvoTruckList);
+    if (event === "Drills") {
+      setVehicleList(DrillsList);
+    } else if (event === "Jumbos") {
+      setVehicleList(JumbosList);
+    } else if (event === "LHD") {
+      setVehicleList(LHDList);
+    } else if (event === "LPDT") {
+      setVehicleList(LPDTList);
+    }else if (event === "Charmac") {
+      setVehicleList(CharmacList);
+    }else if (event === "Scalar") {
+      setVehicleList(ScalarList);
     }
   };
 
@@ -180,13 +196,15 @@ function Projects() {
     <>
       <ToastContainer />
       <div className={Styles.container}>
-        <div className={Styles.heading}>EXCAVATOR ALLOCATION</div>
+        <div className={Styles.heading}>MACHINE ALLOCATION</div>
         <div className={Styles.List}>
           <div className={Styles.options}>
-            <h3 onClick={() => handleOptions("Excavator")}>Excavator</h3>
-            <h3 onClick={() => handleOptions("Ripper Dozer")}>Ripper Dozer</h3>
-            <h3 onClick={() => handleOptions("Wheel loader")}>Wheel loader</h3>
-            <h3 onClick={() => handleOptions("Volvo trucks")}>Volvo trucks</h3>
+            <h3 onClick={() => handleOptions("Drills")}>Production Drills</h3>
+            <h3 onClick={() => handleOptions("Jumbos")}>Development Drills/Jumbos</h3>
+            <h3 onClick={() => handleOptions("LHD")}>LHD</h3>
+            <h3 onClick={() => handleOptions("LPDT")}>LPDT</h3>
+            <h3 onClick={() => handleOptions("Charmac")}>Charmac</h3>
+            <h3 onClick={() => handleOptions("Scalar")}>Scalar</h3>
           </div>
         </div>
         <div className={Styles.section}>
@@ -211,9 +229,9 @@ function Projects() {
               required
             >
               <option value="">Select an option</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option value="1">A</option>
+              <option value="2">B</option>
+              <option value="3">C</option>
             </select>
           </div>
           <div className={Styles.content}>

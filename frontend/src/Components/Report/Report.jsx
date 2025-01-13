@@ -30,8 +30,8 @@ function Report() {
 
     try {
       const response = await axios.post(
-        // "http://localhost:5005/api/idlehours",
-        "https://vedanta-services.onrender.com/api/idlehours",
+        "http://localhost:5005/api/idlehours",
+        // "https://vedanta-services.onrender.com/api/idlehours",
         data
       );
       toast.success("Idle Situation Submitted Successfully");
@@ -121,9 +121,9 @@ function Report() {
                 required
               >
                 <option value="">Select an option</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
               </select>
             </div>
             <div className={Styles.content}>
@@ -135,18 +135,7 @@ function Report() {
                 style={{ width: "7rem" }}
                 required
               >
-                <option value="">Excavator</option>
-                <option value="Ve-3">Ve-3</option>
-                <option value="Ve-4">Ve-4</option>
-                <option value="Ve-5">Ve-5</option>
-                <option value="Ve-6">Ve-6</option>
-                <option value="Ve-7">Ve-7</option>
-                <option value="KVE-9">KVE-9</option>
-                <option value="KVE-10">KVE-10</option>
-                <option value="KVE-11">KVE-11</option>
-                <option value="KVE-12">KVE-12</option>
-                <option value="KVE-13">KVE-13</option>
-                <option value="KVE-14">KVE-14</option>
+                <option value="">Machine</option>
               </select>
 
               <button type="submit">Submit</button>
@@ -194,8 +183,6 @@ function Report() {
                 required
               >
                 <option value="">Select an option</option>
-                <option value="NRT pick up/drop">NRT pick up/drop</option>
-                <option value="Relieving">Relieving</option>
                 <option value="Bad weather/Heavy Rainfall">
                   Bad weather/Heavy Rainfall
                 </option>
@@ -205,7 +192,6 @@ function Report() {
                 <option value="No Internal Transport">
                   No Internal Transport
                 </option>
-                <option value="Late Duty Bus">Late Duty Bus</option>
                 <option value="Public/Local Authority Problem">
                   Public/Local Authority Problem
                 </option>
@@ -213,7 +199,6 @@ function Report() {
                 <option value="Union Related Issues">
                   Union Related Issues
                 </option>
-                <option value="Canteen Issue">Canteen Issue</option>
               </select>
             </div>
           </div>

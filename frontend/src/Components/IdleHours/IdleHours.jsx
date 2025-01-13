@@ -17,7 +17,7 @@ const IdleHours = () => {
     const fetchEmployees = async () => {
       try {
         const response = await axios.get(
-          //   `http://localhost:5005/api/idlehours`
+            // `http://localhost:5005/api/idlehours`
           `https://vedanta-services.onrender.com/api/idlehours`
         );
         setData(response.data.idleHours);
